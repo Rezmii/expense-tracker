@@ -20,7 +20,7 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -73,7 +73,7 @@ const Form = () => {
           <p className="text-danger">{errors.category.message}</p>
         )}
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button disabled={!isValid} type="submit" className="btn btn-primary">
         Submit
       </button>
     </form>
