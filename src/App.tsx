@@ -34,18 +34,14 @@ function App() {
 
   const handleDataFromForm = (data: Expense) => {
     setExpenseList([...expenseList, data]);
-    console.log(expenseList);
   };
 
   const handleDataRemove = (index: Number) => {
-    setExpenseList(
-      expenseList.filter((expense, indexOfArr) => indexOfArr !== index)
-    );
+    setExpenseList(expenseList.filter((_, indexOfArr) => indexOfArr !== index));
   };
 
   return (
     <>
-      {console.log(expenseList)}
       <Form sendData={handleDataFromForm}></Form>
       <ExpenseList
         expenseList={expenseList}
