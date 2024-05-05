@@ -37,7 +37,11 @@ function App() {
     console.log(expenseList);
   };
 
-  //const handleDataRemove = (data) => {};
+  const handleDataRemove = (index: Number) => {
+    setExpenseList(
+      expenseList.filter((expense, indexOfArr) => indexOfArr !== index)
+    );
+  };
 
   return (
     <>
@@ -45,11 +49,7 @@ function App() {
       <Form sendData={handleDataFromForm}></Form>
       <ExpenseList
         expenseList={expenseList}
-        onRemove={(index) => {
-          setExpenseList(
-            expenseList.filter((expense, indexOfArr) => indexOfArr !== index)
-          );
-        }}
+        onRemove={handleDataRemove}
       ></ExpenseList>
     </>
   );
