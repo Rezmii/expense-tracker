@@ -18,30 +18,6 @@ const ExpenseList = ({ expenseList, onRemove }: Props) => {
     setCategory(event.target.value);
   };
 
-  const renderTableRow = (expense: Expense, index: number) => {
-    return (
-      <tr key={index}>
-        <td>{expense.description}</td>
-        <td>
-          {expense.amount.toString().includes(".")
-            ? expense.amount.toFixed(2)
-            : expense.amount}
-        </td>
-        <td>{expense.category}</td>
-        <td>
-          <button
-            className="btn btn-danger"
-            onClick={() => {
-              onRemove(index);
-            }}
-          >
-            X
-          </button>
-        </td>
-      </tr>
-    );
-  };
-
   const showTable = () => {
     if (category !== "")
       return (
@@ -67,6 +43,30 @@ const ExpenseList = ({ expenseList, onRemove }: Props) => {
           </tbody>
         </table>
       );
+  };
+
+  const renderTableRow = (expense: Expense, index: number) => {
+    return (
+      <tr key={index}>
+        <td>{expense.description}</td>
+        <td>
+          {expense.amount.toString().includes(".")
+            ? expense.amount.toFixed(2)
+            : expense.amount}
+        </td>
+        <td>{expense.category}</td>
+        <td>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              onRemove(index);
+            }}
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    );
   };
 
   return (
