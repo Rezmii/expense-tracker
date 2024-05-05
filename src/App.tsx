@@ -2,6 +2,12 @@ import { useState } from "react";
 import Form from "./components/Form";
 import ExpenseList from "./components/ExpenseList";
 
+interface Expense {
+  description: string;
+  amount: number;
+  category: string;
+}
+
 function App() {
   const [expenseList, setExpenseList] = useState([
     {
@@ -25,9 +31,16 @@ function App() {
       category: "entertainment",
     },
   ]);
+
+  const handleDataFromForm = (data: Expense) => {
+    setExpenseList([...expenseList, data]);
+    console.log(expenseList);
+  };
+
   return (
     <>
-      <Form></Form>
+      {console.log(expenseList)}
+      <Form sendData={handleDataFromForm}></Form>
       <ExpenseList expenseList={expenseList}></ExpenseList>
     </>
   );

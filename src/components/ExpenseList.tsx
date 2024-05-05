@@ -18,30 +18,20 @@ const ExpenseList = ({ expenseList }: Props) => {
   };
 
   const showTable = () => {
-    return (
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {category === "all"
-            ? expenseList.map((expense, index) => (
-                <tr key={index}>
-                  <td>{expense.description}</td>
-                  <td>{expense.amount}</td>
-                  <td>{expense.category}</td>
-                  <td>
-                    <button>X</button>
-                  </td>
-                </tr>
-              ))
-            : expenseList.map((expense, index) =>
-                expense.category === category ? (
+    if (category !== "")
+      return (
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {category === "all"
+              ? expenseList.map((expense, index) => (
                   <tr key={index}>
                     <td>{expense.description}</td>
                     <td>{expense.amount}</td>
@@ -50,12 +40,24 @@ const ExpenseList = ({ expenseList }: Props) => {
                       <button>X</button>
                     </td>
                   </tr>
-                ) : null
-              )}
-        </tbody>
-      </table>
-    );
+                ))
+              : expenseList.map((expense, index) =>
+                  expense.category === category ? (
+                    <tr key={index}>
+                      <td>{expense.description}</td>
+                      <td>{expense.amount}</td>
+                      <td>{expense.category}</td>
+                      <td>
+                        <button>X</button>
+                      </td>
+                    </tr>
+                  ) : null
+                )}
+          </tbody>
+        </table>
+      );
   };
+
   return (
     <>
       <select
