@@ -14,6 +14,16 @@ function App() {
       amount: 4,
       category: "groceries",
     },
+    {
+      description: "test2",
+      amount: 5,
+      category: "utilities",
+    },
+    {
+      description: "test3",
+      amount: 15,
+      category: "entertainment",
+    },
   ]);
   return (
     <>

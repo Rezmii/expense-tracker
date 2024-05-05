@@ -19,30 +19,41 @@ const ExpenseList = ({ expenseList }: Props) => {
 
   const showTable = () => {
     return (
-      category === "groceries" && (
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Category</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {expenseList.map((expense, index) => (
-              <tr key={index}>
-                <td>{expense.description}</td>
-                <td>{expense.amount}</td>
-                <td>{expense.category}</td>
-                <td>
-                  <button>xd</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {category === "all"
+            ? expenseList.map((expense, index) => (
+                <tr key={index}>
+                  <td>{expense.description}</td>
+                  <td>{expense.amount}</td>
+                  <td>{expense.category}</td>
+                  <td>
+                    <button>X</button>
+                  </td>
+                </tr>
+              ))
+            : expenseList.map((expense, index) =>
+                expense.category === category ? (
+                  <tr key={index}>
+                    <td>{expense.description}</td>
+                    <td>{expense.amount}</td>
+                    <td>{expense.category}</td>
+                    <td>
+                      <button>X</button>
+                    </td>
+                  </tr>
+                ) : null
+              )}
+        </tbody>
+      </table>
     );
   };
   return (
