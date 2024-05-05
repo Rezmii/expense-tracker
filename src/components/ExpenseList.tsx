@@ -1,5 +1,3 @@
-import { ChangeEvent, useState } from "react";
-
 interface Expense {
   description: string;
   amount: number;
