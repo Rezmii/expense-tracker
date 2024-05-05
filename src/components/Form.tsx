@@ -1,7 +1,7 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { categories } from "../App";
+import categories from "../assets/categories";
 
 interface Props {
   sendData: (data: FormData) => void;
