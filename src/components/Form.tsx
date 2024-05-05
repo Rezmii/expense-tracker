@@ -14,9 +14,7 @@ const schema = z.object({
   amount: z
     .number({ invalid_type_error: "Amount field is required." })
     .min(1, { message: "Amount can't be 0" }),
-  category: z
-    .string()
-    .min(3, { message: "Description must have at least 3 characters" }),
+  category: z.enum(categories),
 });
 
 type FormData = z.infer<typeof schema>;
