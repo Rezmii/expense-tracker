@@ -11,24 +11,24 @@ interface Expense {
 function App() {
   const [expenseList, setExpenseList] = useState([
     {
-      description: "test",
-      amount: 2,
-      category: "groceries",
-    },
-    {
-      description: "test1",
+      description: "Eggs",
       amount: 4,
-      category: "groceries",
+      category: "Groceries",
     },
     {
-      description: "test2",
-      amount: 5,
-      category: "utilities",
+      description: "Bread",
+      amount: 2.3,
+      category: "Groceries",
     },
     {
-      description: "test3",
-      amount: 15,
-      category: "entertainment",
+      description: "Water Bill",
+      amount: 20,
+      category: "Utilities",
+    },
+    {
+      description: "Cinema",
+      amount: 32,
+      category: "Entertainment",
     },
   ]);
 
@@ -37,11 +37,20 @@ function App() {
     console.log(expenseList);
   };
 
+  //const handleDataRemove = (data) => {};
+
   return (
     <>
       {console.log(expenseList)}
       <Form sendData={handleDataFromForm}></Form>
-      <ExpenseList expenseList={expenseList}></ExpenseList>
+      <ExpenseList
+        expenseList={expenseList}
+        onRemove={(index) => {
+          setExpenseList(
+            expenseList.filter((expense, indexOfArr) => indexOfArr !== index)
+          );
+        }}
+      ></ExpenseList>
     </>
   );
 }

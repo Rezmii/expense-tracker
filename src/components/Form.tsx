@@ -25,12 +25,14 @@ const Form = ({ sendData }: Props) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = (data: FieldValues) => {
     sendData(data as FormData);
+    reset();
   };
 
   return (
@@ -69,9 +71,9 @@ const Form = ({ sendData }: Props) => {
         </label>
         <select {...register("category")} className="form-select" id="category">
           <option value=""></option>
-          <option value="groceries">Groceries</option>
-          <option value="utilities">Utilities</option>
-          <option value="entertainment">Entertainment</option>
+          <option value="Groceries">Groceries</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Entertainment">Entertainment</option>
         </select>
 
         {errors.category && (

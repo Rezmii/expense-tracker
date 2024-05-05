@@ -8,9 +8,10 @@ interface Expense {
 
 interface Props {
   expenseList: Expense[];
+  onRemove: (index: Number) => void;
 }
 
-const ExpenseList = ({ expenseList }: Props) => {
+const ExpenseList = ({ expenseList, onRemove }: Props) => {
   const [category, setCategory] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -37,7 +38,14 @@ const ExpenseList = ({ expenseList }: Props) => {
                     <td>{expense.amount}</td>
                     <td>{expense.category}</td>
                     <td>
-                      <button>X</button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                          onRemove(index);
+                        }}
+                      >
+                        X
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -48,7 +56,14 @@ const ExpenseList = ({ expenseList }: Props) => {
                       <td>{expense.amount}</td>
                       <td>{expense.category}</td>
                       <td>
-                        <button>X</button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => {
+                            onRemove(index);
+                          }}
+                        >
+                          X
+                        </button>
                       </td>
                     </tr>
                   ) : null
@@ -68,9 +83,9 @@ const ExpenseList = ({ expenseList }: Props) => {
       >
         <option value=""></option>
         <option value="all">All</option>
-        <option value="groceries">Groceries</option>
-        <option value="utilities">Utilities</option>
-        <option value="entertainment">Entertainment</option>
+        <option value="Groceries">Groceries</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Entertainment">Entertainment</option>
       </select>
       {showTable()}
     </>
