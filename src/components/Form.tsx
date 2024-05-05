@@ -63,12 +63,13 @@ const Form = () => {
         <label htmlFor="category" className="form-label">
           Category
         </label>
-        <input
-          {...register("category")}
-          type="text"
-          className="form-control"
-          id="category"
-        />
+        <select {...register("category")} className="form-select" id="category">
+          <option value=""></option>
+          <option value="groceries">Groceries</option>
+          <option value="utilities">Utilities</option>
+          <option value="entertainment">Entertainment</option>
+        </select>
+
         {errors.category && (
           <p className="text-danger">{errors.category.message}</p>
         )}
