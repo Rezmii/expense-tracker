@@ -59,10 +59,10 @@ const ExpenseList = ({ expenseList, onRemove }: Props) => {
               ? expenseList.map((expense, index) =>
                   renderTableRow(expense, index)
                 )
-              : expenseList.map((expense, index) =>
-                  expense.category === category
-                    ? renderTableRow(expense, index)
-                    : null
+              : expenseList.map(
+                  (expense, index) =>
+                    expense.category === category &&
+                    renderTableRow(expense, index)
                 )}
           </tbody>
         </table>
