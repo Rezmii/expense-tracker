@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface Expense {
   description: string;
@@ -41,6 +41,23 @@ const ExpenseList = ({ expenseList, onRemove }: Props) => {
                     renderTableRow(expense, index)
                 )}
           </tbody>
+          <tfoot>
+            <tr>
+              <td>Total</td>
+              <td>
+                {category === "all"
+                  ? expenseList.reduce(
+                      (acc, expense) => expense.amount + acc,
+                      0
+                    )
+                  : expenseList.reduce((acc, expense) => {
+                      return expense.category === category
+                        ? expense.amount + acc
+                        : acc;
+                    }, 0)}
+              </td>
+            </tr>
+          </tfoot>
         </table>
       );
   };
