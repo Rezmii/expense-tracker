@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "./components/Form";
 import ExpenseList from "./components/ExpenseList";
+import ExpenseFilter from "./components/ExpenseFilter";
 
 interface Expense {
   description: string;
@@ -32,6 +33,8 @@ function App() {
     },
   ]);
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   const handleDataFromForm = (data: Expense) => {
     setExpenseList([...expenseList, data]);
   };
@@ -40,11 +43,21 @@ function App() {
     setExpenseList(expenseList.filter((_, indexOfArr) => indexOfArr !== index));
   };
 
+  const visibleExpenses = selectedCategory
+    ? expenseList.filter((expense) => expense.category === selectedCategory)
+    : expenseList;
+
   return (
     <>
       <Form sendData={handleDataFromForm}></Form>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        ></ExpenseFilter>
+      </div>
+
       <ExpenseList
-        expenseList={expenseList}
+        expenseList={visibleExpenses}
         onRemove={handleDataRemove}
       ></ExpenseList>
     </>

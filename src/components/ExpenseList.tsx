@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface Expense {
   description: string;
@@ -12,56 +12,6 @@ interface Props {
 }
 
 const ExpenseList = ({ expenseList, onRemove }: Props) => {
-  const [category, setCategory] = useState("");
-
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setCategory(event.target.value);
-  };
-
-  const showTable = () => {
-    if (category !== "")
-      return (
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Category</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {category === "all"
-              ? expenseList.map((expense, index) =>
-                  renderTableRow(expense, index)
-                )
-              : expenseList.map(
-                  (expense, index) =>
-                    expense.category === category &&
-                    renderTableRow(expense, index)
-                )}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Total</td>
-              <td>
-                {category === "all"
-                  ? expenseList.reduce(
-                      (acc, expense) => expense.amount + acc,
-                      0
-                    )
-                  : expenseList.reduce((acc, expense) => {
-                      return expense.category === category
-                        ? expense.amount + acc
-                        : acc;
-                    }, 0)}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      );
-  };
-
   const renderTableRow = (expense: Expense, index: number) => {
     return (
       <tr key={index}>
@@ -87,21 +37,27 @@ const ExpenseList = ({ expenseList, onRemove }: Props) => {
   };
 
   return (
-    <>
-      <select
-        className="form-select"
-        id="category"
-        value={category}
-        onChange={handleChange}
-      >
-        <option value=""></option>
-        <option value="all">All</option>
-        <option value="Groceries">Groceries</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Entertainment">Entertainment</option>
-      </select>
-      {showTable()}
-    </>
+    <table className="table table-hover">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenseList.map((expense, index) => renderTableRow(expense, index))}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>
+            {expenseList.reduce((acc, expense) => expense.amount + acc, 0)}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
   );
 };
 
