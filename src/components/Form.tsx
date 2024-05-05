@@ -1,6 +1,7 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { categories } from "../App";
 
 interface Props {
   sendData: (data: FormData) => void;
@@ -71,9 +72,11 @@ const Form = ({ sendData }: Props) => {
         </label>
         <select {...register("category")} className="form-select" id="category">
           <option value=""></option>
-          <option value="Groceries">Groceries</option>
-          <option value="Utilities">Utilities</option>
-          <option value="Entertainment">Entertainment</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
 
         {errors.category && (

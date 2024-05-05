@@ -9,6 +9,8 @@ interface Expense {
   category: string;
 }
 
+export const categories = ["Groceries", "Utilities", "Entertainment"];
+
 function App() {
   const [expenseList, setExpenseList] = useState([
     {
