@@ -2,6 +2,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import categories from "../assets/categories";
+import errorMap from "zod/locales/en.js";
 
 interface Props {
   sendData: (data: FormData) => void;
@@ -14,7 +15,9 @@ const schema = z.object({
   amount: z
     .number({ invalid_type_error: "Amount field is required." })
     .min(1, { message: "Amount can't be 0" }),
-  category: z.enum(categories),
+  category: z.enum(categories, {
+    errorMap: () => ({ message: "Category is required." }),
+  }),
 });
 
 type FormData = z.infer<typeof schema>;
